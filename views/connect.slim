@@ -1,0 +1,25 @@
+doctype html
+html
+  head
+    title Teller QuickStart
+    link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet"
+    meta name="viewport" content="width=device-width, initial-scale=1"
+
+  body class="bg-gray-200 flex h-screen"
+    h1.self-center.text-center.w-full Loading...
+
+
+    javascript:
+      document.addEventListener("DOMContentLoaded", function() {
+        var teller = TellerConnect.setup({
+          applicationId: "#{ENV.fetch('APP_ID')}",
+          onEnrollment: function(enrollment) {
+            document.location = document.location + "?token=" + enrollment.accessToken;
+          },
+        });
+        
+        teller.open()
+      })
+
+    script src="https://cdn.teller.io/connect/connect.js"
+

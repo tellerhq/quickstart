@@ -1,0 +1,21 @@
+doctype html
+html
+  head
+    title Teller QuickStart
+    link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet"
+    meta name="viewport" content="width=device-width, initial-scale=1"
+
+  body class="sm:bg-gray-200"
+    div.container.bg-white.rounded.p-8 class="max-w-3xl sm:m-12 sm:mx-auto sm:shadow"
+      h1
+        img.w-32.mb-6 src="https://teller.io/images/logo.svg"
+      - @accounts.each do |account|
+        div class="sm:flex sm:justify-between sm:items-center"
+          div
+            div. = account["name"]
+            div.flex
+              == institution_logo(account)
+              div.mt-2.text-sm.text-gray-700.ml-3.font-light = mask(account["account_number"])
+          div class="sm:flex sm:flex-col sm:items-end mt-1 sm:mt-0"
+            div.text-green-500 = "$#{account["balances"]["ledger"]}"
+            div.text-gray-500.text-sm.mt-1.font-light = "Available $#{account["balances"]["available"]}"
